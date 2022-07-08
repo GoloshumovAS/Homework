@@ -8,13 +8,13 @@ namespace ConsoleApp2
         {
             byte buttonState; 
             int playerHealth;
-            int numberOfItems;
+            uint numberOfItems;
+            long weaponDamage;
             float luckRatio;
-            float surfaceTemperature;
             double critChance;
-            bool checkHit;
+            decimal playerCoins;
             bool enoughCoins;
-            string locationName;
+            char equipmentType;
             string dialogueOption;
         }
     }
