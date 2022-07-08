@@ -8,9 +8,9 @@ namespace ConsoleApp5
         {
             int pictureCount = 52;
             int rowSize = 3;
-            int availablePictures = pictureCount / rowSize;
+            int availableRow = pictureCount / rowSize;
             int unusedPictures = pictureCount % rowSize;
-            Console.WriteLine($"Полностю заполненных рядов: {availablePictures}," +
+            Console.WriteLine($"Полностю заполненных рядов: {availableRow}," +
                 $" неиспользуемых картинок: {unusedPictures}");
         }
     }
