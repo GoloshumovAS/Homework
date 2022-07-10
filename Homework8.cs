@@ -6,17 +6,12 @@ namespace ConsoleApp10
     {
         static void Main()
         {
-            int i = 0;
-            while (true)
+            string exitWord = "go";
+
+            while (exitWord == "exit")
             {
-                Console.WriteLine(i);
-                i++;
+                exitWord = Console.ReadLine();
                 Console.Write("Введите exit что бы остановить цикл: ");
-                string exiteWord = Console.ReadLine();
-                if (exiteWord == "exit")
-                {
-                    break;
-                }
             }
         }
     }
