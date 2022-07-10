@@ -10,10 +10,12 @@ namespace ConsoleApp9
             string inputWord = Console.ReadLine();
             Console.WriteLine("Введите число повторений");
             int wordCount = Convert.ToInt32(Console.ReadLine());
+            
             for(int i = 0; i < wordCount; i++)
             {
                 Console.WriteLine(inputWord);
             }
+            
         }
     }
 }
