@@ -7,9 +7,8 @@ namespace ConsoleApp11
         static void Main()
         {
             int number = 7;
-            int numberCount;
 
-            for (numberCount = 5; numberCount <= 96; numberCount += number)
+            for (int numberCount = 5; numberCount <= 96; numberCount += number)
             {
                 Console.WriteLine(numberCount);
             }
