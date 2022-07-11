@@ -6,8 +6,12 @@ namespace ConsoleApp13
     {
         static void Main()
         {
-            int rubToUsd = 64, usdToRub = 66, rubToEur = 70, eurToRub = 74;
-            float usdToEur = 1.1f, eurToUsd = 1.3f;
+            int rubToUsd = 64;
+            int usdToRub = 66;
+            int rubToEur = 70;
+            int eurToRub = 74;
+            float usdToEur = 1.1f;
+            float eurToUsd = 1.3f;
             float rubCount = 10000;
             float usdCount = 500;
             float eurCount = 500;
@@ -34,28 +38,25 @@ namespace ConsoleApp13
                         if (moneyReceived == "2")
                         {
                             rubCount -= moneyCount;
-                            usdCount += moneyCount / rubToUsd;
-                            Console.WriteLine($"у вас на счете:\n {rubCount} руб\n {usdCount} usd\n {eurCount} eur");
+                            usdCount += moneyCount * (rubToUsd * 100);
                         }
                         else if (moneyReceived == "3")
                         {
                             rubCount -= moneyCount;
-                            eurCount += moneyCount / rubToEur;
-                            Console.WriteLine($"у вас на счете:\n {rubCount} руб\n {usdCount} usd\n {eurCount} eur");
+                            eurCount += moneyCount * (rubToEur * 100);
                         }
                         break;
+
                     case "2":
                         if (moneyReceived == "1")
                         {
                             usdCount -= moneyCount;
                             rubCount += moneyCount * usdToRub;
-                            Console.WriteLine($"у вас на счете:\n {rubCount} руб\n {usdCount} usd\n {eurCount} eur");
                         }
                         else if (moneyReceived == "3")
                         {
                             usdCount -= moneyCount;
                             eurCount += moneyCount * usdToEur;
-                            Console.WriteLine($"у вас на счете:\n {rubCount} руб\n {usdCount} usd\n {eurCount} eur");
                         }
                         break;
                     case "3":
@@ -63,13 +64,11 @@ namespace ConsoleApp13
                         {
                             eurCount -= moneyCount;
                             rubCount += moneyCount * eurToRub;
-                            Console.WriteLine($"у вас на счете:\n {rubCount} руб\n {usdCount} usd\n {eurCount} eur");
                         }
                         else if (moneyReceived == "2")
                         {
                             eurCount -= moneyCount;
                             usdCount += moneyCount * eurToUsd;
-                            Console.WriteLine($"у вас на счете:\n {rubCount} руб\n {usdCount} usd\n {eurCount} eur");
                         }
                         break;
                 }
