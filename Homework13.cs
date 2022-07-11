@@ -7,40 +7,32 @@ namespace Homework13
         static void Main()
         {
             int cursorPosX;
+            int startPosX = 0;
             int cursorPosY = 0;
+            int stepCursorX = 1;
+            int stepCursorY = 1;
+            int stepLength = 1;
+            string borderString = "";
+            
             Console.WriteLine("Введите слово");
             string userWord = Console.ReadLine();
-            int wordLenght = userWord.Length + 1;
+            int wordLength = userWord.Length + stepLength;
             Console.WriteLine("Введите обозначение границы");
             string borderSign = Console.ReadLine();
 
             Console.Clear();
-            for(cursorPosX = 0; cursorPosX <= wordLenght; cursorPosX++)
+            for(cursorPosX = startPosX; cursorPosX <= wordLength; cursorPosX++)
             {
                 Console.SetCursorPosition(cursorPosX, cursorPosY);
                 Console.Write(borderSign);
+                borderString += borderSign;
             }
-            cursorPosX = 1;
-            cursorPosY = 1;
 
+            cursorPosX = startPosX;
+            cursorPosY += stepCursorY;
             Console.SetCursorPosition(cursorPosX, cursorPosY);
-            Console.Write(userWord);
-
-            cursorPosX = 0;
-            cursorPosY = 1;
-
-            Console.SetCursorPosition(cursorPosX, cursorPosY);
-            Console.Write(borderSign);
-            Console.SetCursorPosition(cursorPosX + wordLenght, cursorPosY);
-            Console.Write(borderSign);
-
-            cursorPosY = 2;
-
-            for (cursorPosX = 0; cursorPosX <= wordLenght; cursorPosX++)
-            {
-                Console.SetCursorPosition(cursorPosX, cursorPosY);
-                Console.Write(borderSign);
-            }
+            Console.WriteLine(borderSign + userWord + borderSign);
+            Console.WriteLine(borderString);
         }
     }
 }
