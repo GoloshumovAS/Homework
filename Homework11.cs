@@ -44,7 +44,6 @@ namespace ConsoleApp13
                             Console.WriteLine($"у вас на счете:\n {rubCount} руб\n {usdCount} usd\n {eurCount} eur");
                         }
                         break;
-
                     case "2":
                         if (moneyReceived == "1")
                         {
