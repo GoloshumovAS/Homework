@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Homework18
 {
@@ -20,9 +20,18 @@ namespace Homework18
             int bossHealth = 2000;
             int playerDamage;
             int bossDamage;
+            int minCritChance = 3;
+            int maxCritChance = 5;
+            int minChanceBossCrit = 1;
+            int maxChanceBossCrit = 20;
+            int minPlayerDamage = 40;
+            int maxPlayerDamage = 60;
+            int minBossDamage = 60;
+            int maxBossDamage = 100;
             int playerCritDamage;
             int bossCritDamage;
             int bossActivateCrit = 15;
+            int armagedonCount = 10;
             int playerDamageArmagedon = 0;
             int playerDamageUsingArmagedon = 70;
             string userCommand;
@@ -38,13 +47,13 @@ namespace Homework18
             while (playerHealthInGame >= 0 && bossHealth >= 0)
             {
                 Random random = new Random();
-                int randomCritChance = random.Next(2, 5);
+                int randomCritChance = random.Next(minCritChance, maxCritChance);
                 Random randomBossCrit = new Random();
-                int randomChanseBossCrit = randomBossCrit.Next(1, 21);
+                int randomChanseBossCrit = randomBossCrit.Next(minChanceBossCrit, maxChanceBossCrit);
                 Random randomPlayerDamage = new Random();
-                playerDamage = randomPlayerDamage.Next(40, 70);
+                playerDamage = randomPlayerDamage.Next(minPlayerDamage, maxPlayerDamage);
                 Random randomBossDamage = new Random();
-                bossDamage = randomBossDamage.Next(70, 100);
+                bossDamage = randomBossDamage.Next(minBossDamage, maxBossDamage);
 
 
                 playerCritDamage = (playerDamage * randomCritChance);
@@ -121,7 +130,7 @@ namespace Homework18
                         if (playerPowerEnergy >= playerPowerEnergyUsingArmagedon)
                         {
                             playerDamage = playerDamageUsingArmagedon;
-                            for (int i = 0; i < 10; i++)
+                            for (int i = 0; i < armagedonCount; i++)
                             {
                                 bossHealth -= playerDamage;
                                 playerDamageArmagedon += playerDamage;
