@@ -6,6 +6,12 @@ namespace Homework18
     {
         static void Main()
         {
+            const string PlayerDamageInGame = "Damage";
+            const string PlayerSpellHealth = "Health";
+            const string PlayerSpellCrit = "Crit";
+            const string PlayerSpellArmagedon = "Armagedon";
+            const string PlayerSpellShield = "Shield";
+            const string PlayerSkipTurn = "Skip";
             int playerPowerEnergy = 100;
             int playerIncreasePowerEnergy = 15;
             int playerPowerEnergyUsingHealth = 30;
@@ -36,13 +42,6 @@ namespace Homework18
             int playerDamageUsingArmagedon = 70;
             string userCommand;
             bool playerSpellShieldLaunch = false;
-            const string playerDamageInGame = "Damage";
-            const string playerSpellHealth = "Health";
-            const string playerSpellCrit = "Crit";
-            const string playerSpellArmagedon = "Armagedon";
-            const string playerSpellShield = "Shield";
-            const string playerSkipTurn = "Skip";
-
 
             while (playerHealthInGame >= 0 && bossHealth >= 0)
             {
@@ -54,11 +53,8 @@ namespace Homework18
                 playerDamage = randomPlayerDamage.Next(minPlayerDamage, maxPlayerDamage);
                 Random randomBossDamage = new Random();
                 bossDamage = randomBossDamage.Next(minBossDamage, maxBossDamage);
-
-
                 playerCritDamage = (playerDamage * randomCritChance);
                 bossCritDamage = (bossDamage * randomCritChance);
-
                 Console.WriteLine("Выберете действие:\n" +
                     "Damage\n" +
                     "Health\n" +
@@ -70,7 +66,7 @@ namespace Homework18
 
                 switch (userCommand)
                 {
-                    case playerDamageInGame:
+                    case PlayerDamageInGame:
                         if (playerPowerEnergy > playerPowerEnergyUsingDamage)
                         {
                             bossHealth -= playerDamage;
@@ -82,8 +78,7 @@ namespace Homework18
                             playerDamage = 0;
                         }
                         break;
-
-                    case playerSpellHealth:
+                    case PlayerSpellHealth:
                         if (playerSpellShieldLaunch == true)
                         {
                             if(playerHealthInGame == playerHealthStart)
@@ -100,6 +95,7 @@ namespace Homework18
                                 playerHealthInGame = playerHealthStart;
                                 Console.WriteLine("Игрок полностью исцелился!");
                             }
+
                             playerSpellShieldLaunch = false;
                             playerPowerEnergy -= playerPowerEnergyUsingHealth;
                             playerDamage = 0;
@@ -112,7 +108,7 @@ namespace Homework18
                         }
                         break;
 
-                    case playerSpellCrit:
+                    case PlayerSpellCrit:
                         if (playerPowerEnergy > playerPowerEnergyUsingCrit)
                         {
                             bossHealth -= Convert.ToInt32(playerCritDamage);
@@ -125,8 +121,7 @@ namespace Homework18
                             playerDamage = 0;
                         }
                         break;
-
-                    case playerSpellArmagedon:
+                    case PlayerSpellArmagedon:
                         if (playerPowerEnergy >= playerPowerEnergyUsingArmagedon)
                         {
                             playerDamage = playerDamageUsingArmagedon;
@@ -144,8 +139,7 @@ namespace Homework18
                             playerDamage = 0;
                         }
                         break;
-
-                    case playerSpellShield:
+                    case PlayerSpellShield:
                         if (playerPowerEnergy > playerPowerEnergyUsingShield)
                         {
                             Console.WriteLine("Игрок активировал щит!");
@@ -160,9 +154,9 @@ namespace Homework18
                             playerDamage = 0;
                         }
                         break;
-
-                    case playerSkipTurn:
+                    case PlayerSkipTurn:
                         Console.WriteLine("Игрок пропускает ход!");
+                        playerDamage = 0;
                         break;
                 }
 
@@ -183,6 +177,15 @@ namespace Homework18
                     $"Энергия игрока {playerPowerEnergy}\n" +
                     $"Здоровье босса {bossHealth}");
                 playerPowerEnergy += playerIncreasePowerEnergy;
+            }
+
+            if (playerHealthInGame > 0)
+            {
+                Console.WriteLine("Игрок победил!");
+            }
+            else if(bossHealth > 0)
+            {
+                Console.WriteLine("Босс победил!");
             }
         }
     }
