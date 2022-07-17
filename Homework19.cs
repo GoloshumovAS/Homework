@@ -27,8 +27,6 @@ namespace Homework19
             }
             Console.WriteLine($"Произведение элементов первого столбца = {multFirstColumn}");
             Console.WriteLine($"Сумма элементов второй строки = {sumSecondString}");
-
-
         }
     }
 }
