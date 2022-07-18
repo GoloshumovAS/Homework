@@ -9,8 +9,15 @@ namespace Homework19
             int[,] arrayNumbers = new int[,] { { 3, 2, 1 }, { 8, 7, 6 } };
             int sumSecondString = 0;
             int multFirstColumn = 1;
-            int xPositionCursor = 0;
-            int yPositionCursor = 0;
+
+            for(int i = 0;i < arrayNumbers.GetLength(0); i++)
+            {
+                for(int j = 0; j < arrayNumbers.GetLength(1); j++)
+                {
+                    Console.Write(arrayNumbers[i, j]);
+                }
+                Console.WriteLine();
+            }
 
             for (int i = 0; i < arrayNumbers.GetLength(0); i++)
             {
@@ -20,13 +27,6 @@ namespace Homework19
             for(int i = 0; i < arrayNumbers.GetLength(1); i++)
             {
                 sumSecondString += arrayNumbers[1, i];
-                Console.SetCursorPosition(xPositionCursor, yPositionCursor);
-                Console.Write(arrayNumbers[0, i]);
-                yPositionCursor++;
-                Console.SetCursorPosition(xPositionCursor, yPositionCursor);
-                Console.Write(arrayNumbers[1, i]);
-                xPositionCursor++;
-                yPositionCursor--;
             }
 
             Console.WriteLine();
