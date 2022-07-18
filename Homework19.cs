@@ -1,30 +1,35 @@
-﻿using System;
+using System;
 
 namespace Homework19
 {
     class Homework19
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            int[,] mass = new int[,] { { 3, 2, 1 }, { 8, 7, 6 } };
+            int[,] arrayNumbers = new int[,] { { 3, 2, 1 }, { 8, 7, 6 } };
             int sumSecondString = 0;
             int multFirstColumn = 1;
-            for(int i = 0; i < mass.GetLength(0); i++)
+            int xPositionCursor = 0;
+            int yPositionCursor = 0;
+
+            for (int i = 0; i < arrayNumbers.GetLength(0); i++)
             {
-                for(int j = 0; j < mass.GetLength(1); j++)
-                {
-                    if (j == 0)
-                    {
-                        multFirstColumn *= mass[i, j];
-                    }
-                    if(i == 1)
-                    {
-                        sumSecondString += mass[i, j];
-                    }
-                    Console.Write(mass[i, j]);
-                }
-                Console.WriteLine();
+                multFirstColumn *= arrayNumbers[i, 0];
             }
+
+            for(int i = 0; i < arrayNumbers.GetLength(1); i++)
+            {
+                sumSecondString += arrayNumbers[1, i];
+                Console.SetCursorPosition(xPositionCursor, yPositionCursor);
+                Console.Write(arrayNumbers[0, i]);
+                yPositionCursor++;
+                Console.SetCursorPosition(xPositionCursor, yPositionCursor);
+                Console.Write(arrayNumbers[1, i]);
+                xPositionCursor++;
+                yPositionCursor--;
+            }
+
+            Console.WriteLine();
             Console.WriteLine($"Произведение элементов первого столбца = {multFirstColumn}");
             Console.WriteLine($"Сумма элементов второй строки = {sumSecondString}");
         }
