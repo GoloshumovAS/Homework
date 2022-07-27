@@ -1,9 +1,4 @@
 ﻿using System;
-//В массиве чисел найдите самый длинный подмассив из одинаковых чисел.
-//Дано 30 чисел. Вывести в консоль сам массив, число, которое само больше раз повторяется подряд и количество повторений.
-//Дополнительный массив не надо создавать.
-//Пример: { 5, 5, 9, 9, 9, 5, 5}
-//-число 9 повторяется большее число раз подряд.
 namespace Homework23
 {
     class Program
@@ -27,7 +22,6 @@ namespace Homework23
                 if(array[i] == array[i-1])
                 {
                     countRep++;
-                    finishVal = array[i];
                 }
                 else
                 {
@@ -36,7 +30,8 @@ namespace Homework23
                 }
                 if (countRep > countMax)
                 {
-                    countMax = countRep; 
+                    countMax = countRep;
+                    finishVal = array[i];
                 }
             }
 
