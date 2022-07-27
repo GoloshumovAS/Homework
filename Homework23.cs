@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 namespace Homework23
 {
-    class Program
+    class Homework23
     {
         static void Main()
         {
@@ -17,16 +17,15 @@ namespace Homework23
                 Console.Write(array[i] + " ");
             }
 
-            for(int i = 1; i < array.Length; i++)
+            for (int i = 1; i < array.Length; i++)
             {
-                if(array[i] == array[i-1])
+                if (array[i] == array[i - 1])
                 {
                     countRep++;
                 }
                 else
                 {
                     countRep = 1;
-                    
                 }
                 if (countRep > countMax)
                 {
@@ -35,10 +34,11 @@ namespace Homework23
                 }
             }
 
-            for(int i = 0; i < countMax; i++)
+            for (int i = 0; i < countMax; i++)
             {
                 Console.Write(finishVal);
             }
+            Console.WriteLine();
         }
     }
 }
