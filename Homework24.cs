@@ -22,9 +22,9 @@ namespace Homework24
                 {
                     if (array[i] > array[j])
                     {
-                        int temp = array[i];
+                        int number = array[i];
                         array[i] = array[j];
-                        array[j] = temp;
+                        array[j] = number;
                     }
                 }
             }
