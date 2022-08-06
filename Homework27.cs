@@ -31,13 +31,13 @@ namespace Homework27
                 switch (command)
                 {
                     case 1:
-                        Filling(ref arraySurname, ref arrayJob);
+                        AddEmployee(ref arraySurname, ref arrayJob);
                         break;
                     case 2:
-                        Conclusion(arraySurname,arrayJob);
+                        DisplayArray(arraySurname,arrayJob);
                         break;
                     case 3:
-                        FindSurname(ref arraySurname, ref arrayJob);
+                        FindSurname(arraySurname,arrayJob);
                         break;
                     case 4:
                         DeleteFile(ref arraySurname, ref arrayJob);
@@ -50,39 +50,36 @@ namespace Homework27
                 Console.WriteLine();
             }
         }
-        static void Filling(ref string[] surname, ref string[] job)
+        static void AddEmployee(ref string[] surname, ref string[] job)
         {
             Console.WriteLine("Введите новую фамилию:");
             string newSurname = Console.ReadLine();
             Console.WriteLine("Введите должность:");
             string newJob = Console.ReadLine();
-            string[] newArraySurname = new string[surname.Length + 1];
-            string[] newArrayJob = new string[job.Length + 1];
 
-            for (int i = 0; i < surname.Length; i++)
-            {
-                newArraySurname[i] = surname[i];
-            }
-            
-            newArraySurname[^1] = newSurname;
-            surname = newArraySurname;
-            
-            for(int i = 0; i < job.Length; i++)
-            {
-                newArrayJob[i] = job[i];
-            }
-                
-            newArrayJob[^1] = newJob;
-            job = newArrayJob;
+            ExpandArray(ref surname, newSurname);
+            ExpandArray(ref job, newJob);
         }
-        static void Conclusion(string[] surname, string[] job)
+        static void ExpandArray(ref string[] array, string userInput)
+        {
+            string[] newArray = new string[array.Length + 1];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                newArray[i] = array[i];
+            }
+
+            newArray[^1] = userInput;
+            array = newArray;
+        }
+        static void DisplayArray(string[] surname, string[] job)
         {
             for(int i = 0; i < surname.Length; i++)
             {
                 Console.WriteLine($"{i + 1} {surname[i]} - {job[i]}");
             }
         }
-        static void FindSurname(ref string[] surname, ref string[] job)
+        static void FindSurname(string[] surname, string[] job)
         {
             Console.WriteLine("Введите фамилию для поиска:");
             string surnameSearch = Console.ReadLine();
@@ -101,44 +98,33 @@ namespace Homework27
         }
         static void DeleteFile(ref string[]surname, ref string[] job)
         {
-            string[] deleteSurname = new string[surname.Length - 1];
-            string[] deleteJob = new string[job.Length - 1];
             Console.WriteLine("Укажите номер записи для удаления:");
             int deleteNumber = Convert.ToInt32(Console.ReadLine());
             deleteNumber -= 1;
+            OverwriteArray(ref surname, deleteNumber);
+            OverwriteArray(ref job, deleteNumber);
+        }
+        static void OverwriteArray(ref string[] array, int number)
+        {
+            string[] deleteArray = new string[array.Length - 1];
 
-            if(deleteNumber < surname.Length)
+            if (number < array.Length)
             {
-                for (int i = 0; i < surname.Length - 1; i++)
+                for (int i = 0; i < array.Length - 1; i++)
                 {
-                    deleteSurname[i] = surname[i];
+                    deleteArray[i] = array[i];
 
-                    if (i == deleteNumber)
+                    if (i == number)
                     {
-                        for (int j = i; j < surname.Length - 1; j++)
+                        for (int j = i; j < array.Length - 1; j++)
                         {
-                            deleteSurname[j] = surname[j + 1];
+                            deleteArray[j] = array[j + 1];
                         }
                         break;
                     }
                 }
 
-                surname = deleteSurname;
-
-                for (int i = 0; i < job.Length - 1; i++)
-                {
-                    deleteJob[i] = job[i];
-
-                    if (i == deleteNumber)
-                    {
-                        for (int j = i; j < job.Length - 1; j++)
-                        {
-                            deleteJob[j] = job[j + 1];
-                        }
-                        break;
-                    }
-                }
-                job = deleteJob;
+                array = deleteArray;
             }
             else
             {
