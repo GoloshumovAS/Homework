@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 //Будет 2 массива: 1) фио 2) должность.
 //Описать функцию заполнения массивов досье, функцию форматированного вывода, функцию поиска по фамилии и функцию удаления досье.
 //Функция расширяет уже имеющийся массив на 1 и дописывает туда новое значение.
@@ -10,7 +10,7 @@
 //5) выход
 namespace Homework27
 {
-    class Program
+    class Homework27
     {
         static void Main()
         {
@@ -46,6 +46,7 @@ namespace Homework27
                         stopProgramm = false;
                         break;
                 }
+
                 Console.WriteLine();
             }
         }
@@ -102,41 +103,47 @@ namespace Homework27
         {
             string[] deleteSurname = new string[surname.Length - 1];
             string[] deleteJob = new string[job.Length - 1];
-
             Console.WriteLine("Укажите номер записи для удаления:");
             int deleteNumber = Convert.ToInt32(Console.ReadLine());
             deleteNumber -= 1;
-            for(int i = 0; i < surname.Length-1; i++)
+
+            if(deleteNumber < surname.Length)
             {
-                deleteSurname[i] = surname[i];
-
-                if(i == deleteNumber)
+                for (int i = 0; i < surname.Length - 1; i++)
                 {
-                    for(int j = i; j < surname.Length-1; j++)
-                    {
-                        deleteSurname[j] = surname[j + 1];
-                    }
-                    break;
-                }
-                
-            }
-            surname = deleteSurname;
+                    deleteSurname[i] = surname[i];
 
-            for (int i = 0; i < job.Length - 1; i++)
+                    if (i == deleteNumber)
+                    {
+                        for (int j = i; j < surname.Length - 1; j++)
+                        {
+                            deleteSurname[j] = surname[j + 1];
+                        }
+                        break;
+                    }
+                }
+
+                surname = deleteSurname;
+
+                for (int i = 0; i < job.Length - 1; i++)
+                {
+                    deleteJob[i] = job[i];
+
+                    if (i == deleteNumber)
+                    {
+                        for (int j = i; j < job.Length - 1; j++)
+                        {
+                            deleteJob[j] = job[j + 1];
+                        }
+                        break;
+                    }
+                }
+                job = deleteJob;
+            }
+            else
             {
-                deleteJob[i] = job[i];
-
-                if (i == deleteNumber)
-                {
-                    for (int j = i; j < job.Length - 1; j++)
-                    {
-                        deleteJob[j] = job[j + 1];
-                    }
-                    break;
-                }
-                
+                Console.WriteLine("Сотрудника с таким номером не существует!");
             }
-            job = deleteJob;
         }
     }
 }
