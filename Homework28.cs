@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace Homework28
 {
-    class Program
+    class Homework28
     {
         static void Main()
         {
@@ -18,18 +18,23 @@ namespace Homework28
             char[] array = new char[10];
             Console.Write('[');
 
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = '#';
-                Console.Write(array[i]);
-            }
-                for (int i = size; i < array.Length; i++)
+            FillHealthbar(ref array, size);
+
+            for (int i = size; i < array.Length; i++)
             {
                 array[i] = '_';
                 Console.Write(array[i]);
             }
 
             Console.Write(']');
+        }
+        static void FillHealthbar(ref char[] array, int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                array[i] = '#';
+                Console.Write(array[i]);
+            }
         }
     }
 }
