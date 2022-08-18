@@ -11,15 +11,14 @@ namespace Homework29
         static void Main()
         {
             bool isStart = true;
-            bool isConvert = false;
 
             while (isStart)
             {
                 Console.WriteLine("Введите число");
                 string userInput = Console.ReadLine();
-                ConvertNumber(userInput, ref isConvert);
+                bool isNumber = CheckValue(userInput);
 
-                if (isConvert == true)
+                if(isNumber == true)
                 {
                     Console.WriteLine($"Число {userInput} сконвертированно");
                     isStart = false;
@@ -27,9 +26,10 @@ namespace Homework29
             }
         }
         
-        static void ConvertNumber(string userNumber, ref bool isConvert)
+        static bool CheckValue(string userNumber)
         {
             bool isWork = true;
+            bool isConvert = false;
 
             while (isWork)
             {
@@ -43,9 +43,10 @@ namespace Homework29
                 else
                 {
                     Console.WriteLine("Попробуйте ввести другое число");
-                    break;
+                    isWork = false;
                 }
             }
+            return isConvert;
         }
     }
 }
