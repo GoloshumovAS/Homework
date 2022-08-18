@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 //Написать функцию, которая запрашивает число у пользователя (с помощью метода Console.ReadLine() ) и пытается сконвертировать его в тип int (с помощью int.TryParse())
 //Если конвертация не удалась у пользователя запрашивается число повторно до тех пор, пока не будет введено верно. 
 //После ввода, который удалось преобразовать в число, число возвращается.
@@ -10,29 +10,35 @@ namespace Homework29
     {
         static void Main()
         {
-            bool startLoop = true;
+            bool isStart = true;
+            bool isConvert = false;
 
-            while (startLoop)
+            while (isStart)
             {
                 Console.WriteLine("Введите число");
                 string userInput = Console.ReadLine();
-                Number(userInput, ref startLoop);
-                if (startLoop != true)
+                ConvertNumber(userInput, ref isConvert);
+
+                if (isConvert == true)
                 {
                     Console.WriteLine($"Число {userInput} сконвертированно");
+                    isStart = false;
                 }
             }
         }
-        static void Number(string userNumber, ref bool runLoop)
+        
+        static void ConvertNumber(string userNumber, ref bool isConvert)
         {
+            bool isWork = true;
 
-            while (runLoop)
+            while (isWork)
             {
-                bool convertResult = int.TryParse(userNumber, out int number);
+                bool canConvert = int.TryParse(userNumber, out int number);
 
-                if (convertResult == true)
+                if (canConvert == true)
                 {
-                    runLoop = false;
+                    isConvert = true;
+                    isWork = false;
                 }
                 else
                 {
