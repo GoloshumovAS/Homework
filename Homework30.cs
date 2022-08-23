@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 //Сделать игровую карту с помощью двумерного массива.
 //Сделать функцию рисования карты. 
 //Помимо этого, дать пользователю возможность перемещаться по карте и взаимодействовать с элементами (например пользователь не может пройти сквозь стену)
@@ -6,7 +6,7 @@
 //Все элементы являются обычными символами
 namespace Homework30
 {
-    class Program
+    class Homework30
     {
         static void Main()
         {
@@ -16,11 +16,11 @@ namespace Homework30
             Console.WriteLine("Введите размер карты по Y: ");
             int y = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
-            char[,] map = PaintMap(x, y);
-            Game(map);
+            char[,] map = CreateMap(x, y);
+            PlayGame(map);
         }
 
-        static char[,] PaintMap(int x, int y)
+        static char[,] CreateMap(int x, int y)
         {
             char[,] map = new char[x, y];
             
@@ -46,7 +46,7 @@ namespace Homework30
             return map;
         }
 
-        static void Game(char [,] map)
+        static void PlayGame(char [,] map)
         {
             Console.CursorVisible = false;
             bool isPlaying = true;
@@ -83,6 +83,7 @@ namespace Homework30
                             playerGoY = 0;
                             break;
                         case ConsoleKey.Enter:
+                            Console.Clear();
                             return;
                             break;
                     }
