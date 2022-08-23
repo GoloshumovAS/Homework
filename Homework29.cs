@@ -6,10 +6,10 @@ namespace Homework29
     {
         static void Main()
         {
-            int number = CheckValue();
+            int number = GetNumber();
             Console.WriteLine($"Ваше число {number} сконвертированно");
         }
-        static int CheckValue()
+        static int GetNumber()
         {
             bool isWork = true;
             int value = 0;
