@@ -23,6 +23,7 @@ namespace Homework30
         static char[,] PaintMap(int x, int y)
         {
             char[,] map = new char[x, y];
+            
             for (int i = 0; i < map.GetLength(0); i++)
             {
                 for (int j = 0; j < map.GetLength(1); j++)
@@ -38,6 +39,7 @@ namespace Homework30
                     Console.Write(map[i, j]);
                 }
             }
+            
             Console.SetCursorPosition(0, map.GetLength(1) + 5);
             Console.Write("Для управления используйте клавиши W A S D\n" +
                 "Для выхода нажмите Enter");
@@ -84,6 +86,7 @@ namespace Homework30
                             return;
                             break;
                     }
+                    
                     if (map[playerX + playerGoX, playerY + playerGoY] != '#')
                     {
                         Console.SetCursorPosition(playerX, playerY);
