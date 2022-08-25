@@ -12,11 +12,11 @@ namespace Homework30
         {
             Console.CursorVisible = true;
             Console.WriteLine("Введите размер карты по X: ");
-            int x = Convert.ToInt32(Console.ReadLine());
+            int mapPositionX = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Введите размер карты по Y: ");
-            int y = Convert.ToInt32(Console.ReadLine());
+            int mapPositionY = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
-            char[,] map = CreateMap(x, y);
+            char[,] map = CreateMap(mapPositionX, mapPositionY);
             PlayGame(map);
         }
 
@@ -46,61 +46,83 @@ namespace Homework30
             return map;
         }
 
-        static void PlayGame(char [,] map)
+        static void PlayGame(char[,] map)
         {
             Console.CursorVisible = false;
+            int playerPositionX = 1;
+            int playerPositionY = 1;
+
+            ControlToPlayer(playerPositionX, playerPositionY, map);
+
+        }
+
+        static void ControlToPlayer(int playerPositionX, int playerPositionY, char[,] map)
+        {
             bool isPlaying = true;
-            int playerX = 1;
-            int playerY = 1;
-            int playerGoX = 0;
-            int playerGoY = 1;
+            int playerDirectionX = 0;
+            int playerDirectionY = 1;
 
             while (isPlaying)
             {
-                Console.SetCursorPosition(playerX, playerY);
-                Console.Write("%");
+                DrawPlayer(playerPositionX,playerPositionY);
+                PressKey(playerPositionX, playerPositionY, ref isPlaying);
+                CheckPlayerPosition(playerPositionX, playerDirectionX, playerPositionY, playerDirectionY, map);
+            }
+        }
 
-                if (Console.KeyAvailable)
+        static void PressKey(int playerDirectionX, int playerDirectionY, ref bool isPlaying)
+        {
+            
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo key = Console.ReadKey(true);
+
+                switch (key.Key)
                 {
-                    ConsoleKeyInfo key = Console.ReadKey(true);
-
-                    switch (key.Key)
-                    {
-                        case ConsoleKey.W:
-                            playerGoX = 0;
-                            playerGoY = -1;
-                            break;
-                        case ConsoleKey.S:
-                            playerGoX = 0;
-                            playerGoY = 1;
-                            break;
-                        case ConsoleKey.A:
-                            playerGoX = -1;
-                            playerGoY = 0;
-                            break;
-                        case ConsoleKey.D:
-                            playerGoX = 1;
-                            playerGoY = 0;
-                            break;
-                        case ConsoleKey.Enter:
-                            Console.Clear();
-                            return;
-                            break;
-                    }
-                    
-                    if (map[playerX + playerGoX, playerY + playerGoY] != '#')
-                    {
-                        Console.SetCursorPosition(playerX, playerY);
-                        Console.Write(' ');
-
-                        playerX += playerGoX;
-                        playerY += playerGoY;
-
-                        Console.SetCursorPosition(playerX, playerY);
-                        Console.Write('%');
-                    }
+                    case ConsoleKey.W:
+                        playerDirectionX = 0;
+                        playerDirectionY = -1;
+                        break;
+                    case ConsoleKey.S:
+                        playerDirectionX = 0;
+                        playerDirectionY = 1;
+                        break;
+                    case ConsoleKey.A:
+                        playerDirectionX = -1;
+                        playerDirectionY = 0;
+                        break;
+                    case ConsoleKey.D:
+                        playerDirectionX = 1;
+                        playerDirectionY = 0;
+                        break;
+                    case ConsoleKey.Enter:
+                        Console.Clear();
+                        return;
+                        break;
                 }
             }
+        }
+
+        static void CheckPlayerPosition(int playerPositionX, int playerDirectionX, int playerPositionY, int playerDirectionY, char [,] map)
+        {
+            
+            if (map[playerPositionX + playerDirectionX, playerPositionY + playerDirectionY] != '#')
+            {
+                Console.SetCursorPosition(playerPositionX, playerPositionY);
+                Console.Write(' ');
+
+                playerPositionX += playerDirectionX;
+                playerPositionY += playerDirectionY;
+
+                Console.SetCursorPosition(playerPositionX, playerPositionY);
+                Console.Write('%');
+            }
+        }
+        
+        static void DrawPlayer(int playerPositionX, int playerPositionY)
+        {
+            Console.SetCursorPosition(playerPositionX, playerPositionY);
+            Console.Write("%");
         }
     }
 }
