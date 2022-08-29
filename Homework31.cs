@@ -29,6 +29,14 @@ namespace Homework31
                 int arrayElement = array[numberReplace];
                 array[numberReplace] = array[i];
                 array[i] = arrayElement;
+            }
+            OutputShuffledArray(array);
+        }
+        
+        static void OutputShuffledArray(int [] array)
+        {
+            for(int i = 0; i < array.Length; i++)
+            {
                 Console.Write(array[i]);
             }
         }
