@@ -25,9 +25,9 @@ namespace Homework31
 
             for (int i = array.Length - 1; i >= 0; i--)
             {
-                int j = random.Next(i);
-                int arrayElement = array[j];
-                array[j] = array[i];
+                int numberReplace = random.Next(i);
+                int arrayElement = array[numberReplace];
+                array[numberReplace] = array[i];
                 array[i] = arrayElement;
                 Console.Write(array[i]);
             }
