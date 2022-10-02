@@ -52,9 +52,9 @@ namespace Homework30
             int playerPositionX = 1;
             int playerPositionY = 1;
 
-            ControlToPlayer(ref isDraw);
             while (isDraw)
             {
+                ControlToPlayer(ref isDraw);
                 DrawPlayer(playerPositionX, playerDirectionX, playerPositionY, playerDirectionY, map); //как передать сюда параметры из метода PressKey?
             }
             
