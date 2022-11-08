@@ -1,4 +1,6 @@
 using System;
+
+using System;
 //Сделать игровую карту с помощью двумерного массива.
 //Сделать функцию рисования карты. 
 //Помимо этого, дать пользователю возможность перемещаться по карте и взаимодействовать с элементами (например пользователь не может пройти сквозь стену)
@@ -20,7 +22,17 @@ namespace Homework30
             Console.SetCursorPosition(0, map.GetLength(1) + 5);
             Console.Write("Для управления используйте клавиши W A S D\n" +
                 "Для выхода нажмите Enter");
-            PlayGame(map);
+
+            Console.CursorVisible = false;
+            int playerPositionX = 1;
+            int playerPositionY = 1;
+            int playerDirectionX = 0;
+            int playerDirectionY = 0;
+
+            while (true)
+            {
+                PlayGame(map, ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY);
+            }
         }
 
         static char[,] CreateMap(int x, int y)
@@ -45,34 +57,14 @@ namespace Homework30
             return map;
         }
 
-        static void PlayGame(char[,] map)
-        {
-            bool isDraw = true;
-            Console.CursorVisible = false;
-            int playerPositionX = 1;
-            int playerPositionY = 1;
-
-            while (isDraw)
-            {
-                ControlToPlayer(ref isDraw);
-                DrawPlayer(playerPositionX, playerDirectionX, playerPositionY, playerDirectionY, map); //как передать сюда параметры из метода PressKey?
-            }
-            
-        }
-
-        static void ControlToPlayer(ref bool isPlaying)
+        static void PlayGame(char[,] map, ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY)
         {
 
-            while (isPlaying)
-            {
-                int playerDirectionX = 0;
-                int playerDirectionY = 1;
-
-                PressKey(ref playerDirectionX, ref playerDirectionY, ref isPlaying);
-            }
+            PressKey(ref playerDirectionX, ref playerDirectionY);
+            DrawPlayer(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
         }
-         
-        static void PressKey(ref int playerDirectionX, ref int playerDirectionY,  ref bool isPlaying)
+
+        static void PressKey(ref int playerDirectionX, ref int playerDirectionY)
         {
 
             if (Console.KeyAvailable)
@@ -98,15 +90,10 @@ namespace Homework30
                         playerDirectionX = 1;
                         playerDirectionY = 0;
                         break;
-                    case ConsoleKey.Enter:
-                        Console.Clear();
-                        isPlaying = false;
-                        break;
                 }
             }
         }
-
-        static void DrawPlayer(int playerPositionX, int playerDirectionX, int playerPositionY, int playerDirectionY, char[,] map)
+        static void DrawPlayer(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
         {
             Console.SetCursorPosition(playerPositionX, playerPositionY);
             Console.Write("%");
