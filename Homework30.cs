@@ -59,12 +59,18 @@ namespace Homework30
 
         static void PlayGame(char[,] map, ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY)
         {
-
-            PressKey(ref playerDirectionX, ref playerDirectionY);
-            DrawPlayer(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
+            CreatePlayer(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
         }
 
-        static void PressKey(ref int playerDirectionX, ref int playerDirectionY)
+        static void CreatePlayer(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
+        {
+            GetDirection(ref playerDirectionX, ref playerDirectionY);
+            CheckBorder(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
+
+
+        }
+
+        static void GetDirection(ref int playerDirectionX, ref int playerDirectionY)
         {
 
             if (Console.KeyAvailable)
@@ -93,11 +99,9 @@ namespace Homework30
                 }
             }
         }
-        static void DrawPlayer(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
-        {
-            Console.SetCursorPosition(playerPositionX, playerPositionY);
-            Console.Write("%");
 
+        static void CheckBorder(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
+        {
             if (map[playerPositionX + playerDirectionX, playerPositionY + playerDirectionY] != '#')
             {
                 Console.SetCursorPosition(playerPositionX, playerPositionY);
@@ -106,9 +110,14 @@ namespace Homework30
                 playerPositionX += playerDirectionX;
                 playerPositionY += playerDirectionY;
 
-                Console.SetCursorPosition(playerPositionX, playerPositionY);
-                Console.Write('%');
+                DrawPlayer(playerPositionX, playerPositionY);
             }
+        }
+
+        static void DrawPlayer(int playerPositionX,int playerPositionY)
+        {
+            Console.SetCursorPosition(playerPositionX, playerPositionY);
+            Console.Write("%");
         }
     }
 }
