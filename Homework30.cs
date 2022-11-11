@@ -12,6 +12,16 @@ namespace Homework30
     {
         static void Main()
         {
+            char MoveUp = 'W';
+            char MoveDown = 'S';
+            char MoveRight = 'D';
+            char MoveLeft = 'A';
+            char Exit = 'Q';
+
+            char player = '%';
+            char border = '#';
+            char emptymap = ' ';
+
             Console.CursorVisible = true;
             Console.WriteLine("Введите размер карты по X: ");
             int mapSizeByX = Convert.ToInt32(Console.ReadLine());
@@ -19,12 +29,12 @@ namespace Homework30
             int mapSizeByY = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
 
-            char[,] map = CreateMap(mapSizeByX, mapSizeByY);
+            char[,] map = CreateMap(mapSizeByX, mapSizeByY, border, emptymap);
             DrawMap(map);
 
             Console.SetCursorPosition(0, map.GetLength(1) + 5);
-            Console.Write("Для управления используйте клавиши W A S D\n" +
-                "Для выхода нажмите Q");
+            Console.Write($"Для управления используйте клавиши {MoveUp} {MoveLeft} {MoveDown} {MoveRight}\n" +
+                $"Для выхода нажмите {Exit}");
 
             Console.CursorVisible = false;
             int playerPositionX = 1;
@@ -34,21 +44,27 @@ namespace Homework30
 
             bool isPlaying = true;
 
-            DrawPlayer(playerPositionX, playerPositionY);
+            DrawPlayer(playerPositionX, playerPositionY, player);
 
             while (isPlaying)
             {
-                PlayGame(map, ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, ref isPlaying);
+                PlayGame(map, ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, ref isPlaying, player, emptymap);
             }
         }
 
-        static void DrawPlayer(int playerPositionX, int playerPositionY)
+        static void DrawPlayer(int playerPositionX, int playerPositionY, char player)
         {
             Console.SetCursorPosition(playerPositionX, playerPositionY);
-            Console.Write('%');
+            Console.Write(player);
         }
 
-        static char[,] CreateMap(int mapSizeByX, int mapSizeByY)
+        static void ClearPlayer(int playerPositionX, int playerPositionY, char emptymap)
+        {
+            Console.SetCursorPosition(playerPositionX, playerPositionY);
+            Console.Write(emptymap);
+        }
+
+        static char[,] CreateMap(int mapSizeByX, int mapSizeByY, char border, char emptymap)
         {
             char[,] map = new char[mapSizeByX, mapSizeByY];
 
@@ -57,11 +73,11 @@ namespace Homework30
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
                     Console.SetCursorPosition(i, j);
-                    map[i, j] = '#';
+                    map[i, j] = border;
 
                     if (i > 0 && i < map.GetLength(0) - 1 && j > 0 && j < map.GetLength(1) - 1)
                     {
-                        map[i, j] = ' ';
+                        map[i, j] = emptymap;
                     }
                 }
             }
@@ -80,11 +96,13 @@ namespace Homework30
             }
         }
 
-        static void PlayGame(char[,] map, ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, ref bool isPlaying)
+        static void PlayGame(char[,] map, ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, ref bool isPlaying, char player, char emptymap)
         {
             CheckKeyboardPress(ref playerDirectionX, ref playerDirectionY, ref isPlaying);
-            bool isBorder = CanMove(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
-            MovePlayer(ref playerPositionX, ref playerPositionY, playerDirectionX, playerDirectionY, ref isBorder);
+            if (CanMove(playerPositionX, playerDirectionX, playerPositionY, playerDirectionY, map))
+            {
+                MovePlayer(ref playerPositionX, ref playerPositionY, playerDirectionX, playerDirectionY, player, emptymap);
+            }
         }
 
         static void CheckKeyboardPress(ref int playerDirectionX, ref int playerDirectionY, ref bool isPlaying)
@@ -125,32 +143,19 @@ namespace Homework30
             }
         }
 
-        static bool CanMove(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
+        static bool CanMove(int playerPositionX, int playerDirectionX, int playerPositionY, int playerDirectionY, char[,] map)
         {
-            bool isBorder = true;
-
-            if (map[playerPositionX + playerDirectionX, playerPositionY + playerDirectionY] != '#')
-            {
-                isBorder = false;
-            }
-
-            return isBorder;
+            return map[playerPositionX + playerDirectionX, playerPositionY + playerDirectionY] != '#';
         }
 
-        static void MovePlayer(ref int playerPositionX, ref int playerPositionY, int playerDirectionX, int playerDirectionY, ref bool isBorder)
+        static void MovePlayer(ref int playerPositionX, ref int playerPositionY, int playerDirectionX, int playerDirectionY, char player, char emptymap)
         {
-            
-            if (isBorder == false)
-            {
-                Console.SetCursorPosition(playerPositionX, playerPositionY);
-                Console.Write(' ');
+            ClearPlayer(playerPositionX, playerPositionY, emptymap);
 
-                playerPositionX += playerDirectionX;
-                playerPositionY += playerDirectionY;
+            playerPositionX += playerDirectionX;
+            playerPositionY += playerDirectionY;
 
-                Console.SetCursorPosition(playerPositionX, playerPositionY);
-                Console.Write("%");
-            }
+            DrawPlayer(playerPositionX, playerPositionY, player);
         }
     }
 }
