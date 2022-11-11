@@ -28,8 +28,9 @@ namespace Homework30
             int playerPositionY = 1;
             int playerDirectionX = 0;
             int playerDirectionY = 0;
-
             bool isPlaying = true;
+
+            CreatePlayer(playerPositionX, playerPositionY);
 
             while (isPlaying)
             {
@@ -37,9 +38,15 @@ namespace Homework30
             }
         }
 
-        static char[,] CreateMap(int x, int y)
+        static void CreatePlayer(int playerPositionX, int playerPositionY)
         {
-            char[,] map = new char[x, y];
+            Console.SetCursorPosition(playerPositionX, playerPositionY);
+            Console.Write('%');
+        }
+
+        static char[,] CreateMap(int mapSizeByX, int mapSizeByY)
+        {
+            char[,] map = new char[mapSizeByX, mapSizeByY];
 
             for (int i = 0; i < map.GetLength(0); i++)
             {
@@ -61,22 +68,17 @@ namespace Homework30
 
         static void PlayGame(char[,] map, ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, ref bool isPlaying)
         {
-            CreatePlayer(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map, ref isPlaying);
-        }
-
-        static void CreatePlayer(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map, ref bool isPlaying)
-        {
             CheckKeyboardPress(ref playerDirectionX, ref playerDirectionY, ref isPlaying);
-            CanMove(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
+            CheckAbilityMove(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
         }
 
         static void CheckKeyboardPress(ref int playerDirectionX, ref int playerDirectionY, ref bool isPlaying)
         {
-            const char moveUp = 'W';
-            const char moveDown = 'S';
-            const char moveRight = 'D';
-            const char moveLeft = 'A';
-            const char exit = 'Q';
+            const char MoveUp = 'W';
+            const char MoveDown = 'S';
+            const char MoveRight = 'D';
+            const char MoveLeft = 'A';
+            const char Exit = 'Q';
 
             if (Console.KeyAvailable)
             {
@@ -85,30 +87,30 @@ namespace Homework30
 
                 switch (key.Key)
                 {
-                    case (ConsoleKey)moveUp:
+                    case (ConsoleKey)MoveUp:
                         playerDirectionX = 0;
                         playerDirectionY = -1;
                         break;
-                    case (ConsoleKey)moveDown:
+                    case (ConsoleKey)MoveDown:
                         playerDirectionX = 0;
                         playerDirectionY = 1;
                         break;
-                    case (ConsoleKey)moveLeft:
+                    case (ConsoleKey)MoveLeft:
                         playerDirectionX = -1;
                         playerDirectionY = 0;
                         break;
-                    case (ConsoleKey)moveRight:
+                    case (ConsoleKey)MoveRight:
                         playerDirectionX = 1;
                         playerDirectionY = 0;
                         break;
-                    case (ConsoleKey)exit:
+                    case (ConsoleKey)Exit:
                         isPlaying = false;
                         break;
                 }
             }
         }
 
-        static void CanMove(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
+        static void CheckAbilityMove(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
         {
             if (map[playerPositionX + playerDirectionX, playerPositionY + playerDirectionY] != '#')
             {
