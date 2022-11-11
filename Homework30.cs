@@ -18,7 +18,10 @@ namespace Homework30
             Console.WriteLine("Введите размер карты по Y: ");
             int mapSizeByY = Convert.ToInt32(Console.ReadLine());
             Console.Clear();
+
             char[,] map = CreateMap(mapSizeByX, mapSizeByY);
+            DrawMap(map);
+
             Console.SetCursorPosition(0, map.GetLength(1) + 5);
             Console.Write("Для управления используйте клавиши W A S D\n" +
                 "Для выхода нажмите Q");
@@ -28,9 +31,10 @@ namespace Homework30
             int playerPositionY = 1;
             int playerDirectionX = 0;
             int playerDirectionY = 0;
+
             bool isPlaying = true;
 
-            CreatePlayer(playerPositionX, playerPositionY);
+            DrawPlayer(playerPositionX, playerPositionY);
 
             while (isPlaying)
             {
@@ -38,7 +42,7 @@ namespace Homework30
             }
         }
 
-        static void CreatePlayer(int playerPositionX, int playerPositionY)
+        static void DrawPlayer(int playerPositionX, int playerPositionY)
         {
             Console.SetCursorPosition(playerPositionX, playerPositionY);
             Console.Write('%');
@@ -59,17 +63,28 @@ namespace Homework30
                     {
                         map[i, j] = ' ';
                     }
-
-                    Console.Write(map[i, j]);
                 }
             }
             return map;
         }
 
+        static void DrawMap(char[,] map)
+        {
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.GetLength(1); j++)
+                {
+                    Console.SetCursorPosition(i, j);
+                    Console.Write(map[i, j]);
+                }
+            }
+        }
+
         static void PlayGame(char[,] map, ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, ref bool isPlaying)
         {
             CheckKeyboardPress(ref playerDirectionX, ref playerDirectionY, ref isPlaying);
-            CheckAbilityMove(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
+            bool isBorder = CanMove(ref playerPositionX, playerDirectionX, ref playerPositionY, playerDirectionY, map);
+            MovePlayer(ref playerPositionX, ref playerPositionY, playerDirectionX, playerDirectionY, ref isBorder);
         }
 
         static void CheckKeyboardPress(ref int playerDirectionX, ref int playerDirectionY, ref bool isPlaying)
@@ -110,24 +125,32 @@ namespace Homework30
             }
         }
 
-        static void CheckAbilityMove(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
+        static bool CanMove(ref int playerPositionX, int playerDirectionX, ref int playerPositionY, int playerDirectionY, char[,] map)
         {
+            bool isBorder = true;
+
             if (map[playerPositionX + playerDirectionX, playerPositionY + playerDirectionY] != '#')
             {
-                MovePlayer(ref playerPositionX, ref playerPositionY, playerDirectionX, playerDirectionY);
+                isBorder = false;
             }
+
+            return isBorder;
         }
 
-        static void MovePlayer(ref int playerPositionX, ref int playerPositionY, int playerDirectionX, int playerDirectionY)
+        static void MovePlayer(ref int playerPositionX, ref int playerPositionY, int playerDirectionX, int playerDirectionY, ref bool isBorder)
         {
-            Console.SetCursorPosition(playerPositionX, playerPositionY);
-            Console.Write(' ');
+            
+            if (isBorder == false)
+            {
+                Console.SetCursorPosition(playerPositionX, playerPositionY);
+                Console.Write(' ');
 
-            playerPositionX += playerDirectionX;
-            playerPositionY += playerDirectionY;
+                playerPositionX += playerDirectionX;
+                playerPositionY += playerDirectionY;
 
-            Console.SetCursorPosition(playerPositionX, playerPositionY);
-            Console.Write("%");
+                Console.SetCursorPosition(playerPositionX, playerPositionY);
+                Console.Write("%");
+            }
         }
     }
 }
