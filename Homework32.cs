@@ -24,20 +24,22 @@ namespace Homework32
             question.Add(key2,answer2 );
             question.Add(key3,answer3 );
 
-            CheckWord(userWord, question);
+            ResponseToUser(userWord, question);
         }
-        static void CheckWord(string word, Dictionary<string,string> question)
+
+        static void ResponseToUser(string word, Dictionary<string,string> question)
         {
-            foreach(var item in question)
+            foreach(KeyValuePair<string, string> item in question)
             {
-                if(question.ContainsKey(word))
+                if (question.ContainsKey(word))
                 {
-                    Console.WriteLine($"ваш ответ:  {item.Value}");
+                    Console.WriteLine($"ваш ответ:  {question[word]}");
                     break;
                 }
                 else
                 {
                     Console.WriteLine("Ответа на ваш запрос нет.");
+                    break;
                 }
             }
         }
