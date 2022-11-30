@@ -12,24 +12,24 @@ namespace Homework33
         static void Main(string[] args)
         {
             int earnedShop = 0;
-            int [] money = new int[] {100,200,300};
+            int [] buyerMoney = new int[] {100,200,300};
 
-            Queue<String> people = new Queue<string>();
-            people.Enqueue("Andrey");
-            people.Enqueue("Nikolay");
-            people.Enqueue("Olga");
+            Queue<String> buyer = new Queue<string>();
+            buyer.Enqueue("Andrey");
+            buyer.Enqueue("Nikolay");
+            buyer.Enqueue("Olga");
             Console.Clear();
 
-            PurchaseInformation(earned, money, people);
+            PurchaseInformation(earnedShop, buyerMoney, buyer);
         }
 
-        static void PurchaseInformation(int earnedShop, int [] money, Queue<string> people)
+        static void PurchaseInformation(int earnedShop, int [] buyerMoney, Queue<string> buyer)
         {
-            for(int i = 0; i < money.Length; i++)
+            for(int i = 0; i < buyerMoney.Length; i++)
             {
                 bool isWorks = true;
-                Console.WriteLine($"Покупатель {people.Dequeue()} купил товар на {money[i]} монет");
-                earnedShop += money[i];
+                Console.WriteLine($"Покупатель {buyer.Dequeue()} купил товар на {buyerMoney[i]} монет");
+                earnedShop += buyerMoney[i];
                 Console.WriteLine($"на нашем счете {earnedShop} монет");
 
                 while (isWorks)
