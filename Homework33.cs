@@ -18,7 +18,6 @@ namespace Homework33
             people.Enqueue("Andrey");
             people.Enqueue("Nikolay");
             people.Enqueue("Olga");
-
             Console.Clear();
 
             Pokupki(myMoney, money, people);
@@ -28,7 +27,6 @@ namespace Homework33
             for(int i = 0; i < money.Length; i++)
             {
                 bool wait = true;
-
                 Console.WriteLine($"Покупатель {people.Dequeue()} купил товар на {money[i]} монет");
                 myMoney += money[i];
                 Console.WriteLine($"на нашем счете {myMoney} монет");
