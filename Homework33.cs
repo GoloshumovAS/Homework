@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 //У вас есть множество целых чисел. Каждое целое число - это сумма покупки.
 //Вам нужно обслуживать клиентов до тех пор, пока очередь не станет пуста.
@@ -11,7 +11,7 @@ namespace Homework33
     {
         static void Main(string[] args)
         {
-            int myMoney = 0;
+            int earned = 0;
             int [] money = new int[] {100,200,300};
 
             Queue<String> people = new Queue<string>();
@@ -20,27 +20,27 @@ namespace Homework33
             people.Enqueue("Olga");
             Console.Clear();
 
-            PurchaseInformation(myMoney, money, people);
+            PurchaseInformation(earned, money, people);
         }
+
         static void PurchaseInformation(int myMoney, int [] money, Queue<string> people)
         {
             for(int i = 0; i < money.Length; i++)
             {
-                bool wait = true;
+                bool isWorks = true;
                 Console.WriteLine($"Покупатель {people.Dequeue()} купил товар на {money[i]} монет");
                 myMoney += money[i];
                 Console.WriteLine($"на нашем счете {myMoney} монет");
 
-                while (wait)
+                while (isWorks)
                 {
                     ConsoleKeyInfo key = Console.ReadKey(true);
 
                     if (key.Key == ConsoleKey.Enter)
                     {
                         Console.Clear();
-                        wait = false;
+                        isWorks = false;
                     }
-
                 }
             }
         }
