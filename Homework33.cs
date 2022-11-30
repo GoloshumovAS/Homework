@@ -20,9 +20,9 @@ namespace Homework33
             people.Enqueue("Olga");
             Console.Clear();
 
-            Pokupki(myMoney, money, people);
+            PurchaseInformation(myMoney, money, people);
         }
-        static void Pokupki(int myMoney, int [] money, Queue<string> people)
+        static void PurchaseInformation(int myMoney, int [] money, Queue<string> people)
         {
             for(int i = 0; i < money.Length; i++)
             {
