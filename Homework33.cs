@@ -11,7 +11,7 @@ namespace Homework33
     {
         static void Main(string[] args)
         {
-            int earned = 0;
+            int earnedShop = 0;
             int [] money = new int[] {100,200,300};
 
             Queue<String> people = new Queue<string>();
@@ -23,14 +23,14 @@ namespace Homework33
             PurchaseInformation(earned, money, people);
         }
 
-        static void PurchaseInformation(int myMoney, int [] money, Queue<string> people)
+        static void PurchaseInformation(int earnedShop, int [] money, Queue<string> people)
         {
             for(int i = 0; i < money.Length; i++)
             {
                 bool isWorks = true;
                 Console.WriteLine($"Покупатель {people.Dequeue()} купил товар на {money[i]} монет");
-                myMoney += money[i];
-                Console.WriteLine($"на нашем счете {myMoney} монет");
+                earnedShop += money[i];
+                Console.WriteLine($"на нашем счете {earnedShop} монет");
 
                 while (isWorks)
                 {
