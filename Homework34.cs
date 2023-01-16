@@ -17,6 +17,7 @@ namespace Homework34
 
             AddNumbers(numbers, commandSum, commandExit, isRun);
         }
+        
         static void AddNumbers(List<int> numbers, string sum, string exit, bool isRun)
         {
             int allSum = 0;
