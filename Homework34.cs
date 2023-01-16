@@ -21,6 +21,7 @@ namespace Homework34
         static void AddNumbers(List<int> numbers, string sum, string exit, bool isRun)
         {
             int allSum = 0;
+            
             while (isRun)
             {
                 string userInput = Console.ReadLine();
@@ -40,6 +41,7 @@ namespace Homework34
                     }
                     Console.WriteLine(allSum);
                 }
+                
                 else if (userInput == exit)
                 {
                     isRun = false;
