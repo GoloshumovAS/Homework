@@ -15,13 +15,11 @@ namespace Homework34
                 $" или команду {commandSum} для получения суммы элементов массива," +
                 $" или команду {commandExit} для выхода ");
 
-            AddNumbers(numbers, commandSum, commandExit, isRun);
+            EnterDate(numbers, commandSum, commandExit, isRun);
         }
-        
-        static void AddNumbers(List<int> numbers, string sum, string exit, bool isRun)
+        static void EnterDate(List<int> numbers, string sum, string exit, bool isRun)
         {
             int allSum = 0;
-            
             while (isRun)
             {
                 string userInput = Console.ReadLine();
@@ -39,9 +37,10 @@ namespace Homework34
                     {
                         allSum += numbers[i];
                     }
+
                     Console.WriteLine(allSum);
                 }
-                
+
                 else if (userInput == exit)
                 {
                     isRun = false;
