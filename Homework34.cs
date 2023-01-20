@@ -15,30 +15,25 @@ namespace Homework34
                 $" или команду {commandSum} для получения суммы элементов массива," +
                 $" или команду {commandExit} для выхода ");
 
-            EnterDate(numbers, commandSum, commandExit, isRun);
+            CountNumbers(numbers, commandSum, commandExit, isRun);
         }
-        static void EnterDate(List<int> numbers, string sum, string exit, bool isRun)
+        static void CountNumbers(List<int> numbers, string sum, string exit, bool isRun)
         {
             int allSum = 0;
             while (isRun)
             {
                 string userInput = Console.ReadLine();
-                int value;
-                bool isNumber = int.TryParse(userInput, out value);
+                int newNumber;
+                bool isNumber = int.TryParse(userInput, out newNumber);
 
                 if (isNumber == true)
                 {
-                    numbers.Add(value);
+                    numbers.Add(newNumber);
                 }
 
                 else if (userInput == sum)
                 {
-                    for (int i = 0; i < numbers.Count; i++)
-                    {
-                        allSum += numbers[i];
-                    }
-
-                    Console.WriteLine(allSum);
+                    SumInputNumbers(numbers, allSum);
                 }
 
                 else if (userInput == exit)
@@ -46,6 +41,14 @@ namespace Homework34
                     isRun = false;
                 }
             }
+        }
+        static void SumInputNumbers(List<int> numbers, int allSum)
+        {
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                allSum += numbers[i];
+            }
+            Console.WriteLine(allSum);
         }
     }
 }
