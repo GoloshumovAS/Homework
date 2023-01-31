@@ -48,6 +48,7 @@ namespace Homework34
             {
                 allSum += numbers[i];
             }
+            
             Console.WriteLine(allSum);
         }
     }
