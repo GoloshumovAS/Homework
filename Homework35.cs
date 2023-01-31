@@ -6,10 +6,10 @@ namespace Homework35
     {
         static void Main(string[] args)
         {
-            const int CommandAddEmloyee = 1;
-            const int CommandDisplayDict = 2;
-            const int CommandDeleteFile = 3;
-            const int CommandExitProgramm = 4;
+            const string CommandAddEmloyee = "1";
+            const string CommandDisplayDict = "2";
+            const string CommandDeleteFile = "3";
+            const string CommandExitProgramm = "4";
             bool stopProgramm = true;
             Dictionary<string, string> employeesFile = new Dictionary<string, string>();
             employeesFile.Add("Иванов А.П.", "Программист");
@@ -23,7 +23,7 @@ namespace Homework35
                     $"{CommandDisplayDict} - Вывести все досье\n" +
                     $"{CommandDeleteFile} - Удалить досье\n" +
                     $"{CommandExitProgramm} - Выход\n");
-                int command = Convert.ToInt32(Console.ReadLine());
+                string command = Console.ReadLine();
 
                 switch (command)
                 {
@@ -44,27 +44,45 @@ namespace Homework35
                 Console.WriteLine();
             }
         }
+
         static void AddEmployee(Dictionary<string, string> employeesFile)
         {
             Console.Write("Введите ФИО: ");
             string inputFullName = Console.ReadLine();
             Console.Write("Введите должность: ");
             string inputEmployeePosition = Console.ReadLine();
-            employeesFile.Add(inputFullName, inputEmployeePosition);
-        }
-        static void DisplayDictEmployee(Dictionary<string, string> employeesFile)
-        {
-            foreach (KeyValuePair<string, string> kvp in employeesFile)
-            {
 
-                Console.WriteLine($"{kvp.Key} - {kvp.Value}");
+            if (!employeesFile.ContainsKey(inputFullName))
+            {
+                employeesFile.Add(inputFullName, inputEmployeePosition);
+            }
+            else
+            {
+                Console.WriteLine("Такой сотрудник уже есть в базе!");
             }
         }
+
+        static void DisplayDictEmployee(Dictionary<string, string> employeesFile)
+        {
+            foreach (KeyValuePair<string, string> key in employeesFile)
+            {
+                Console.WriteLine($"{key.Key} - {key.Value}");
+            }
+        }
+
         static void DeleteFile(Dictionary<string, string> employeesFile)
         {
             Console.Write("Введите ФИО для удаления: ");
             string userDelete = Console.ReadLine();
-            employeesFile.Remove(userDelete);
+
+            if (employeesFile.Remove(userDelete))
+            {
+                Console.WriteLine("Удаление прошло успешно!");
+            }
+            else
+            {
+                Console.WriteLine("Удаление невозможно!");
+            }
         }
     }
 }
