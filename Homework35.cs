@@ -52,7 +52,7 @@ namespace Homework35
             Console.Write("Введите должность: ");
             string inputEmployeePosition = Console.ReadLine();
 
-            if (!employeesFile.ContainsKey(inputFullName))
+            if (employeesFile.ContainsKey(inputFullName) == false)
             {
                 employeesFile.Add(inputFullName, inputEmployeePosition);
             }
