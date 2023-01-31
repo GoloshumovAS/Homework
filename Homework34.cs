@@ -43,6 +43,7 @@ namespace Homework34
         static void SumNumbers(List<int> numbers)
         {
             int allSum = 0;
+            
             for (int i = 0; i < numbers.Count; i++)
             {
                 allSum += numbers[i];
