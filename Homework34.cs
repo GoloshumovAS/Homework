@@ -11,15 +11,15 @@ namespace Homework34
             string commandSum = "sum";
             string commandExit = "exit";
             bool isRun = true;
+            int allSum = 0;
             Console.WriteLine($"Введите число в массив," +
                 $" или команду {commandSum} для получения суммы элементов массива," +
                 $" или команду {commandExit} для выхода ");
 
-            CountNumbers(numbers, commandSum, commandExit, isRun);
+            CheckCommand(numbers, commandSum, commandExit, allSum, isRun);
         }
-        static void CountNumbers(List<int> numbers, string sum, string exit, bool isRun)
+        static void CheckCommand(List<int> numbers, string sum, string exit, int allSum, bool isRun)
         {
-            int allSum = 0;
             while (isRun)
             {
                 string userInput = Console.ReadLine();
@@ -28,21 +28,23 @@ namespace Homework34
 
                 if (isNumber == true)
                 {
-                    numbers.Add(newNumber);
+                    AddNumbers(numbers, newNumber);
                 }
-
                 else if (userInput == sum)
                 {
-                    SumInputNumbers(numbers, allSum);
+                    SumNumbers(numbers, allSum);
                 }
-
                 else if (userInput == exit)
                 {
                     isRun = false;
                 }
             }
         }
-        static void SumInputNumbers(List<int> numbers, int allSum)
+        static void AddNumbers(List<int> numbers, int newNumber)
+        {
+            numbers.Add(newNumber);
+        }
+        static void SumNumbers(List<int> numbers, int allSum)
         {
             for (int i = 0; i < numbers.Count; i++)
             {
