@@ -10,13 +10,13 @@ namespace Homework35
             const string CommandDisplayDict = "2";
             const string CommandDeleteFile = "3";
             const string CommandExitProgramm = "4";
-            bool stopProgramm = true;
+            bool canStopProgram = true;
             Dictionary<string, string> employeesFile = new Dictionary<string, string>();
             employeesFile.Add("Иванов А.П.", "Программист");
             employeesFile.Add("Сидоров Г.Ш.", "Инженер");
             employeesFile.Add("Петров И.Ю.", "Менеджер");
 
-            while (stopProgramm)
+            while (canStopProgram)
             {
                 Console.WriteLine("Выберете пункт меню:\n" +
                     $"{CommandAddEmloyee} - Добавить досье\n" +
@@ -37,7 +37,7 @@ namespace Homework35
                         DeleteFile(employeesFile);
                         break;
                     case CommandExitProgramm:
-                        stopProgramm = false;
+                        canStopProgram = false;
                         break;
                 }
 
@@ -52,7 +52,7 @@ namespace Homework35
             Console.Write("Введите должность: ");
             string inputEmployeePosition = Console.ReadLine();
 
-            if (employeesFile.ContainsKey(inputFullName) == false)
+            if (!employeesFile.ContainsKey(inputFullName))
             {
                 employeesFile.Add(inputFullName, inputEmployeePosition);
             }
