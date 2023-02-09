@@ -14,7 +14,6 @@ namespace Homework37
         }
     }
 
-
     class Player 
     {
         public string PlayerName;
