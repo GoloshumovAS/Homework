@@ -1,7 +1,6 @@
 ﻿using System;
 //Создать класс игрока, у которого есть поля с его положением в x, y.
 //Создать класс отрисовщик, с методом, который отрисует игрока.
-
 //Попрактиковаться в работе со свойствами.
 namespace Homework38
 {
@@ -35,6 +34,7 @@ namespace Homework38
         {
             _gamer = "%";
         }
+        
         public void Draw(int positionX, int positionY)
         {
             Console.Clear();
