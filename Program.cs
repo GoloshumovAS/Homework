@@ -12,7 +12,6 @@ namespace Homework38
             PositionPlayer player = new PositionPlayer();
             DrawPlayer draw = new DrawPlayer();
             draw.Draw(player.positionX,player.positionY);
-
         }
     }
 
@@ -20,7 +19,6 @@ namespace Homework38
     {
         public int positionX;
         public int positionY;
-
 
         public PositionPlayer()
         {
